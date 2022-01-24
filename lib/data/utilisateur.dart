@@ -28,7 +28,7 @@ class Utilisateur {
 
   static get sql {
     return """CREATE TABLE Utilisateur (
-      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       prenom TEXT NOT NULL,
       nom TEXT NOT NULL
     )""";

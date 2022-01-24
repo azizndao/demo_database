@@ -84,25 +84,44 @@ FutureOr<void> initializeDatabase(Database db, int version) async {
 }
 ```
 J'ai choisi de mettre le code sql permettant de créer chaque table dans la class correspondant par soucci de simplicité.
+[utilisateur.dart](./lib/data/utilisateur.dart)
 ```dart
-// utilisateur.dart
 class Utilisateur {
+  static const tableName = "utilisateur";
+
   final int id;
   final String prenom;
   final String nom;
 
   Utilisateur({this.id = 0, required this.prenom, required this.nom});
 
+  static Utilisateur fromMap(Map<String, dynamic> value) {
+    return Utilisateur(
+      id: value['id'],
+      prenom: value['prenom'],
+      nom: value['nom'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "prenom": prenom,
+      "nom": nom,
+    };
+  }
+
   static get sql {
     return """CREATE TABLE Utilisateur (
-      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       prenom TEXT NOT NULL,
       nom TEXT NOT NULL
     )""";
   }
 }
-
-// medicament.dart
+```
+[medicament.dart](./lib/data/medicament.dart)
+```dart
 class Medicament {
   final int id;
   final String nom;
@@ -112,14 +131,15 @@ class Medicament {
 
   static get sql {
     return """CREATE TABLE Utilisateur (
-      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       nom TEXT NOT NULL,
       prix DOUBLE NOT NULL
     )""";
   }
 }
-
-// vente.dart
+```
+[vente.dart](./lib/data/vente.dart)
+```dart
 class Vente {
   final int id;
   final Medicament medicament;
@@ -129,7 +149,7 @@ class Vente {
 
   static get sql {
     return """CREATE TABLE Utilisateur (
-      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       id_medicament INTEGER NOT NULL,
       id_utilisateur INTEGER NOT NULL,
     )""";

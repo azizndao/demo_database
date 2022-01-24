@@ -10,7 +10,7 @@ class Vente {
 
   static get sql {
     return """CREATE TABLE Utilisateur (
-      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       id_medicament INTEGER NOT NULL,
       id_utilisateur INTEGER NOT NULL,
     )""";
